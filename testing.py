@@ -1,6 +1,7 @@
 
 # Exemplo adaptado de
 # https://blog.thoughtram.io/machine-learning/2016/11/02/understanding-XOR-with-keras-and-tensorlow.html
+
 import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Dense

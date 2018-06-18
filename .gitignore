@@ -1,5 +1,8 @@
+
+# Logs do Keras
 /logs
+
 /.vscode
-*.so
-*.dll
-*.dylib
+/__pycache__
+
+*.pyc
