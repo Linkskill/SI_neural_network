@@ -1,2 +1,5 @@
 /logs
 /.vscode
+*.so
+*.dll
+*.dylib

@@ -18,11 +18,13 @@ model.add(Dense(16, input_dim=2, activation='sigmoid'))
 # a gente definiu como output da camada anterior (16)
 model.add(Dense(1, activation='sigmoid'))
 
+# Ainda preciso descobrir o que são essas coisas
+# e como configurar a taxa de aprendizado
 model.compile(loss='mean_squared_error',
               optimizer='adam',
               metrics=['binary_accuracy'])
 
-model.fit(training_data, target_data, nb_epoch=5000, verbose=2)
+model.fit(training_data, target_data, epochs=1000, verbose=2)
 
 # predict(nosso input)
 print(model.predict(training_data).round())
