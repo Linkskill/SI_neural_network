@@ -1,6 +1,7 @@
 
 from vrep import *
 from math import sqrt
+from math import atan2
 
 def end_connection(clientID):
   print("Encerrando conexão...")
@@ -25,7 +26,6 @@ if __name__ == "__main__":
 
   print("Conectando-se ao VREP...", end='')
   clientID = simxStart('127.0.0.1', 19999, True, True, 5000, 5)
-
   scene_name = "CenaKhepheraK3.ttt"
 
   if clientID != -1:
@@ -34,9 +34,9 @@ if __name__ == "__main__":
 		# Inicialização do robo
     robot_name = "K3_robot"
     print(f"Procurando {robot_name}...", end='')
-    returnCode, robot_handle = simxGetObjectHandle(clientID, robot_name, simx_opmode_blocking)
+    return_code, robot_handle = simxGetObjectHandle(clientID, robot_name, simx_opmode_blocking)
 
-    if returnCode == simx_return_ok:
+    if return_code == simx_return_ok:
       print("Encontrado!")
     else:
       print("Falhou!")
@@ -50,13 +50,13 @@ if __name__ == "__main__":
     sensor_names = [ "K3_infraredSensorL", "K3_infraredSensorLM",
                     "K3_infraredSensorML", "K3_infraredSensorMR",
                     "K3_infraredSensorRM", "K3_infraredSensorR" ]
-    sensor_handles = [0]*NUM_SENSORS
+    sensor_handles = []
     distances = [0]*NUM_SENSORS
 
     for name in sensor_names:
       print(f"  {name}...", end='')
-      returnCode, handle = simxGetObjectHandle(clientID, name, simx_opmode_blocking)
-      if returnCode == simx_return_ok:
+      return_code, handle = simxGetObjectHandle(clientID, name, simx_opmode_blocking)
+      if return_code == simx_return_ok:
         print("ok!")
         sensor_handles.append(handle)
       else:
@@ -65,7 +65,6 @@ if __name__ == "__main__":
 
     # Inicialização dos motores
     print("Conectando-se aos motores...", end='')
-
     return_code_left, left_motor_handle = simxGetObjectHandle(clientID, "K3_leftWheelMotor", simx_opmode_blocking)
     return_code_right, right_motor_handle = simxGetObjectHandle(clientID, "K3_rightWheelMotor", simx_opmode_blocking)
     if return_code_left == simx_return_ok and return_code_right == simx_return_ok:
@@ -85,16 +84,32 @@ if __name__ == "__main__":
     #	Loop de Execução
     while (simxGetConnectionId(clientID) != -1):
       # Lê posição e ângulo
-      returnCode, position = simxGetObjectPosition(clientID, robot_handle, -1, simx_opmode_blocking)
-      returnCode, eulerAngles = simxGetObjectOrientation(clientID, robot_handle, -1, simx_opmode_blocking)
+      return_code, position = simxGetObjectPosition(clientID, robot_handle, -1, simx_opmode_blocking)
+      return_code, euler_angles = simxGetObjectOrientation(clientID, robot_handle, -1, simx_opmode_blocking)
       current_x = position[0]
       current_y = position[1]
-      current_angle = eulerAngles[2]
+      current_angle = euler_angles[2]
+
+      # Calcula a distancia e o angulo com o objetivo
       distance_to_goal = euclidean_distance((current_x, current_y), (goal_x, goal_y))
 
+      goal_angle = atan2(goal_y-current_y, goal_x-current_x)
+      angle_turning_to_one_side = abs(goal_angle - current_angle)
+      angle_turning_to_opposite_side = (2*pi) - angle_turning_to_one_side
+
+      smallest_angle_to_turn = min(angle_turning_to_one_side, angle_turning_to_opposite_side)
+      if smallest_angle_to_turn == angle_turning_to_one_side:
+        angle_to_turn = goal_angle - current_angle
+      else:
+        angle_to_turn = -angle_turning_to_opposite_side
+
+      if angle_to_turn > pi:
+        angle_to_turn -= 2*pi
+
       print(f"\nPosição do {robot_name}: ({current_x}, {current_y})")
-      print(f"  Orientação: {current_angle} radianos")
+      print(f"  Orientação atual: {current_angle} radianos")
       print(f"  Distância até o objetivo: {distance_to_goal}")
+      print(f"  Angulo para ficar de frente pro objetivo: {angle_to_turn} radianos")
 
       # Lê os sensores, calcula as distâncias
       for i in range(NUM_SENSORS):

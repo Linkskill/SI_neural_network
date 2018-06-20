@@ -1,0 +1,19 @@
+# distance_to_goal angle_to_turn sensor_L sensor_LM sensor_ML sensor_MR sensor_RM sensor_RM
+
+# Virando pra direita
+5, -1.57, 1, 1, 1, 1, 1, 1, 10, 0         # Sem paredes e objetivo pi/2 pra direita , vira full direita
+5, -0.79, 0.2, 0.15, 1, 1, 1, 1, 10, 6    # Parede na esquerda e objetivo ~pi/4 pra direita, vira pra direita (se afasta da parede)
+5, -0.79, 1, 1, 0.16, 0.16, 1, 1, 10, 0   # Parede na frente e objetivo ~pi/4 pra direita, vira pra direita (começa a contornar pela direita)
+5, -0.79, 1, 1, 1, 1, 0.15, 0.2, 10, 6    # Parede na direita e objetivo ~pi/4, vira pra direita (terminando de contornar)
+# Exemplos do lincoln invertidos
+
+# Virando pra esquerda
+# Inverso do que eu fiz pra direita
+# Exemplos do Lincoln
+
+# Segue reto
+# Sem paredes e objetivo reto, segue reto
+# Corredor e objetivo pra frente, segue reto
+# Corredor e objetivo pra trás, segue reto
+# (condições para estar contornando/seguindo uma parede), segue reto
+# Exemplos do Jorge

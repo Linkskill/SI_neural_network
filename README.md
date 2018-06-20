@@ -8,10 +8,10 @@
     git clone https://github.com/GabrielEug2/SI-NeuralNetwork.git
 ```
 
-* Verifique se você possui o Python 3 e pip instalado:
+* Verifique se você possui o Python 3.6.x ou superior e pip instalados:
 ```
-    python3 -V  # => "Python 3.x.x"
-    pip3 -V  # => "pip 10.x.x from (...)/python3.x/site-packages/pip (python 3.x)
+    python3 -V  # => "Python 3.6.x"
+    pip3 -V  # => "pip 10.x.x from (...)/python3.6/site-packages/pip (python 3.6)
 ```
 
 Caso não estejam instalados:
@@ -52,7 +52,7 @@ Rode o script python:
 
 * Se na instalação do tensorflow aparecer
 <pre>
-    "Could not install packages due to an EnvironmentError: [Errno 13] Permission denied: '/usr/local/lib/python3.x/dist-packages/tensorflow-1.x.x.dist-info'
+    "Could not install packages due to an EnvironmentError: [Errno 13] Permission denied: '/usr/local/lib/python3.6/dist-packages/tensorflow-1.x.x.dist-info'
     Consider using the `--user` option or check the permissions.
 </pre>
 Faça como indicado e use a flag --user
