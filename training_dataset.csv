@@ -10,6 +10,10 @@
 # Virando pra esquerda
 # Inverso do que eu fiz pra direita
 # Exemplos do Lincoln
+5, 1.57, 1, 1, 1, 1, 1, 1, -1, 10         # Sem paredes e objetivo pi/2 pra esquerda , vira full esquerda
+5, 0.79, 0.19, 0.14, 1, 1, 1, 1, 4, 8    # Parede na esquerda e objetivo ~pi/4 pra esquerda, vira pra esquerda (se afasta da parede)
+5, 0.79, 1, 1, 0.15, 0.15, 1, 1, -1, 10   # Parede na frente e objetivo ~pi/4 pra esquerda, vira pra esquerda (começa a contornar pela esquerda)
+5, 0.79, 1, 1, 1, 1, 0.14, 0.19, 4, 8    # Parede na direita e objetivo ~pi/4, vira pra esquerda (terminando de contornar)
 
 # Segue reto
 # Sem paredes e objetivo reto, segue reto
