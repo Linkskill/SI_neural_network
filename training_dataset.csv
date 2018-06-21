@@ -1,23 +1,20 @@
 # distance_to_goal angle_to_turn sensor_L sensor_LM sensor_ML sensor_MR sensor_RM sensor_RM
 
 # Virando pra direita
-5, -1.57, 1, 1, 1, 1, 1, 1, 10, 0         # Sem paredes e objetivo pi/2 pra direita , vira full direita
-5, -0.79, 0.2, 0.15, 1, 1, 1, 1, 10, 6    # Parede na esquerda e objetivo ~pi/4 pra direita, vira pra direita (se afasta da parede)
-5, -0.79, 1, 1, 0.16, 0.16, 1, 1, 10, 0   # Parede na frente e objetivo ~pi/4 pra direita, vira pra direita (começa a contornar pela direita)
-5, -0.79, 1, 1, 1, 1, 0.15, 0.2, 10, 6    # Parede na direita e objetivo ~pi/4, vira pra direita (terminando de contornar)
-# Exemplos do lincoln invertidos
+5, -1.57, 1, 1, 1, 1, 1, 1, 1.0, 0.0        # Sem paredes e objetivo pi/2 pra direita , vira full direita
+5, -0.79, 0.2, 0.15, 1, 1, 1, 1, 0.8, 0.4  # Parede na esquerda e objetivo ~pi/4 pra direita, vira pra direita (se afasta da parede)
+5, -0.79, 1, 1, 0.16, 0.16, 1, 1, 1.0, 0.0  # Parede na frente e objetivo ~pi/4 pra direita, vira pra direita (começa a contornar pela direita)
+5, -0.79, 1, 1, 1, 1, 1, 0.2, 0.8, 0.4     # Parede na direita e objetivo ~pi/4, vira pra direita (terminando de contornar)
 
 # Virando pra esquerda
-# Inverso do que eu fiz pra direita
-# Exemplos do Lincoln
-5, 1.57, 1, 1, 1, 1, 1, 1, -1, 10         # Sem paredes e objetivo pi/2 pra esquerda , vira full esquerda
-5, 0.79, 0.19, 0.14, 1, 1, 1, 1, 4, 8    # Parede na esquerda e objetivo ~pi/4 pra esquerda, vira pra esquerda (se afasta da parede)
-5, 0.79, 1, 1, 0.15, 0.15, 1, 1, -1, 10   # Parede na frente e objetivo ~pi/4 pra esquerda, vira pra esquerda (começa a contornar pela esquerda)
-5, 0.79, 1, 1, 1, 1, 0.14, 0.19, 4, 8    # Parede na direita e objetivo ~pi/4, vira pra esquerda (terminando de contornar)
+5, 1.57, 1, 1, 1, 1, 1, 1, 0.0, 1.0         # Sem paredes e objetivo pi/2 pra esquerda , vira full esquerda
+5, 0.79, 0.2, 1, 1, 1, 1, 1, 0.4, 0.8        # Parede na esquerda e objetivo ~pi/4 pra esquerda, vira pra esquerda (se afasta da parede)
+5, 0.79, 1, 1, 0.16, 0.16, 1, 1, 0.0, 1.0   # Parede na frente e objetivo ~pi/4 pra esquerda, vira pra esquerda (começa a contornar pela esquerda)
+5, 1.57, 1, 1, 1, 1, 0.15, 0.2, 0.4, 0.8     # Parede na direita e objetivo ~pi/4, vira pra esquerda (terminando de contornar)
 
 # Segue reto
-# Sem paredes e objetivo reto, segue reto
-# Corredor e objetivo pra frente, segue reto
-# Corredor e objetivo pra trás, segue reto
-# (condições para estar contornando/seguindo uma parede), segue reto
-# Exemplos do Jorge
+5, 1.57, 1, 1, 1, 1, 0.15, 0.2, 1.0, 1.0       # (Contornando parede da direita)
+5, 1.57, 0.2, 0.15, 1, 1, 1, 1, 1.0, 1.0       # (Contornando parede da esquerda)
+5, 0, 1, 1, 1, 1, 1, 1, 1.0, 1.0               # Sem paredes e objetivo reto, segue reto
+5, 0, 0.2, 0.15, 1, 1, 0.15, 0.2, 1.0, 1.0     # Corredor e objetivo pra frente, segue reto
+5, 3.14, 0.2, 0.15, 1, 1, 0.15, 0.2, 1.0, 1.0  # Corredor e objetivo pra trás, segue reto

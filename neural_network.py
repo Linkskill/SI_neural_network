@@ -11,31 +11,38 @@ import keras.optimizers
 # Outputs:
 #   left_speed
 #   right_speed
-training_data = np.loadtxt(open('training_dataset.csv', "rb"), delimiter=', ', usecols=range(8))
-target_data = np.loadtxt(open('training_dataset.csv', "rb"), delimiter=', ', usecols=(8,9))
 
-print(training_data)
-print(target_data)
+def create_network():
+    training_data = np.loadtxt(open('training_dataset.csv', "rb"), delimiter=', ', usecols=range(8))
+    target_data = np.loadtxt(open('training_dataset.csv', "rb"), delimiter=', ', usecols=(8,9))
 
-model = Sequential()
-model.add(Dense(10, input_dim=8, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dense(2, activation='sigmoid'))
+    print(training_data)
+    print(target_data)
 
-our_optimizer = keras.optimizers.SGD(lr=0.03, momentum=0.0, decay=0.0, nesterov=False)
-model.compile(loss='mean_squared_error',
-              optimizer=our_optimizer,
-              metrics=['accuracy'])
+    model = Sequential()
+    model.add(Dense(10, input_dim=8, activation='sigmoid'))
+    model.add(Dense(10, activation='sigmoid'))
+    model.add(Dense(10, activation='sigmoid'))
+    model.add(Dense(2, activation='sigmoid'))
 
-model.fit(training_data, target_data, epochs=1, verbose=2)
+    our_optimizer = keras.optimizers.SGD(lr=0.03, momentum=0.0, decay=0.0, nesterov=False)
+    model.compile(loss='mean_squared_error',
+    #              optimizer=our_optimizer,
+                optimizer='adam',
+                metrics=['accuracy'])
 
-# Output da sigmoide varia de 0 a 1, tem que normalizar pro
-# limite min e max que a gente quer de velocidade
-# (fiz de 0 a 10, até a gente decidir)
-print("Results:")
-print(model.predict(training_data) * 10)
+    model.fit(training_data, target_data, epochs=2000, verbose=2)
 
-print("Expected:")
-print(target_data)
+    # Output da sigmoide varia de 0 a 1, tem que normalizar pro
+    # limite min e max que a gente quer de velocidade
+    # (fiz de 0 a 10, até a gente decidir)
+    print("Results:")
+    print(model.predict(training_data))
+
+    print("Expected:")
+    print(target_data)
+
+    return model
+
+if __name__ == '__main__':
+    create_network()

@@ -1,7 +1,9 @@
 
 from vrep import *
+from math import pi
 from math import sqrt
 from math import atan2
+from neural_network import *
 
 def end_connection(clientID):
   print("Encerrando conexão...")
@@ -75,11 +77,8 @@ if __name__ == "__main__":
       exit()
     print()
 
-    #
-    #
     # Inicialização e treino da rede neural
-    #
-    #
+    model = create_network()
 
     #	Loop de Execução
     while (simxGetConnectionId(clientID) != -1):
@@ -119,19 +118,26 @@ if __name__ == "__main__":
           distances[i] = (pow(detectedPoint[0], 2) + 
                           pow(detectedPoint[1], 2) + 
                           pow(detectedPoint[2], 2))
-          distances = sqrt(distances[i])
+          distances[i] = sqrt(distances[i])
         else:
           distances[i] = 1;
 
-      #
-      #
       # Rede neural (já treinada):
-      #   Inputs: distance_to_goal, current_angle, distância dos 5 sensores
+      #   Inputs: distance_to_goal, angle_to_turn, distância dos 5 sensores
       #   Outputs: left_speed, right_speed
-      #
-      #
 
-      left_speed, right_speed = 10, 10
+      inputs = np.array([[
+        distance_to_goal,
+        angle_to_turn,
+        distances[0],
+        distances[1],
+        distances[2],
+        distances[3],
+        distances[4],
+        distances[5]
+      ]])
+      outputs = model.predict(inputs)[0] * 10
+      left_speed, right_speed = outputs[0], outputs[1]
 
       print(f"  Esq={left_speed}, Dir={right_speed}")
       _ = simxSetJointTargetVelocity(clientID, left_motor_handle, left_speed, simx_opmode_oneshot)
