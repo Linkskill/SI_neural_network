@@ -20,9 +20,12 @@ def create_network():
     print(target_data)
 
     model = Sequential()
-    model.add(Dense(10, input_dim=8, activation='sigmoid'))
-    model.add(Dense(10, activation='sigmoid'))
-    model.add(Dense(10, activation='sigmoid'))
+# fazendo testes no site tensorflow acabei achando um "padrão"legal: 
+# para 13 entradas e 2 saidas, fazer 15 (13 + 2) neuronios na primeira camada,
+# (como sao 2 saidas) com 2 camadas intermediarias, e a cada camada adicional 
+# subtrair 1 neurônio (as vezes ajuda como critério de desempate para conflitos)
+    model.add(Dense(15, input_dim=8, activation='sigmoid'))
+    model.add(Dense(14, activation='sigmoid'))
     model.add(Dense(2, activation='sigmoid'))
 
     our_optimizer = keras.optimizers.SGD(lr=0.03, momentum=0.0, decay=0.0, nesterov=False)
@@ -31,7 +34,7 @@ def create_network():
                 optimizer='adam',
                 metrics=['accuracy'])
 
-    model.fit(training_data, target_data, epochs=2000, verbose=2)
+    model.fit(training_data, target_data, epochs=500, verbose=2)
 
     # Output da sigmoide varia de 0 a 1, tem que normalizar pro
     # limite min e max que a gente quer de velocidade
