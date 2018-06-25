@@ -2,19 +2,21 @@
 
 # Virando pra direita
 5, -1.57, 1, 1, 1, 1, 1, 1, 1.0, 0.0        # Sem paredes e objetivo pi/2 pra direita , vira full direita
-5, -0.79, 0.2, 0.15, 1, 1, 1, 1, 0.8, 0.4  # Parede na esquerda e objetivo ~pi/4 pra direita, vira pra direita (se afasta da parede)
-5, -0.79, 1, 1, 0.16, 0.16, 1, 1, 1.0, 0.0  # Parede na frente e objetivo ~pi/4 pra direita, vira pra direita (começa a contornar pela direita)
-5, -0.79, 1, 1, 1, 1, 1, 0.2, 0.8, 0.4     # Parede na direita e objetivo ~pi/4, vira pra direita (terminando de contornar)
+5, -0.79, 0.18, 0.18, 1, 1, 1, 1, 0.8, 0.0  # Parede na esquerda e objetivo ~pi/4 pra direita, vira pra direita (se afasta da parede)
+5, -0.79, 1, 1, 0.18, 0.18, 1, 1, 0.8, 0.0  # Parede na frente e objetivo ~pi/4 pra direita, vira pra direita (começa a contornar pela direita)
+5, -1.57, 1, 1, 0.18, 0.18, 1, 1, 1.0, 0.0  # Parede na frente e objetivo ~pi/2 pra direita, vira full direita
+5, -0.79, 1, 1, 1, 1, 1, 0.18, 0.8, 0.0     # Parede na direita e objetivo ~pi/4, vira pra direita (terminando de contornar)
 
 # Virando pra esquerda
 5, 1.57, 1, 1, 1, 1, 1, 1, 0.0, 1.0         # Sem paredes e objetivo pi/2 pra esquerda , vira full esquerda
-5, 0.79, 0.2, 1, 1, 1, 1, 1, 0.4, 0.8        # Parede na esquerda e objetivo ~pi/4 pra esquerda, vira pra esquerda (se afasta da parede)
-5, 0.79, 1, 1, 0.16, 0.16, 1, 1, 0.0, 1.0   # Parede na frente e objetivo ~pi/4 pra esquerda, vira pra esquerda (começa a contornar pela esquerda)
-5, 1.57, 1, 1, 1, 1, 0.15, 0.2, 0.4, 0.8     # Parede na direita e objetivo ~pi/4, vira pra esquerda (terminando de contornar)
+5, 0.79, 0.18, 1, 1, 1, 1, 1, 0.0, 0.8        # Parede na esquerda e objetivo ~pi/4 pra esquerda, vira pra esquerda (se afasta da parede)
+5, 0.79, 1, 1, 0.18, 0.18, 1, 1, 0.0, 0.8   # Parede na frente e objetivo ~pi/4 pra esquerda, vira pra esquerda (começa a contornar pela esquerda)
+5, 1.57, 1, 1, 0.18, 0.18, 1, 1, 0.0, 1.0   # Parede na frente e objetivo ~pi/2 pra esquerda, vira full esquerda
+5, 1.57, 1, 1, 1, 1, 0.18, 0.18, 0.0, 0.8     # Parede na direita e objetivo ~pi/4, vira pra esquerda (terminando de contornar)
 
 # Segue reto
-5, 1.57, 1, 1, 1, 1, 0.15, 0.2, 1.0, 1.0       # (Contornando parede da direita)
-5, 1.57, 0.2, 0.15, 1, 1, 1, 1, 1.0, 1.0       # (Contornando parede da esquerda)
+5, 1.57, 1, 1, 1, 1, 0.18, 0.18, 1.0, 1.0       # (Contornando parede da direita)
+5, 1.57, 0.18, 0.18, 1, 1, 1, 1, 1.0, 1.0       # (Contornando parede da esquerda)
 5, 0, 1, 1, 1, 1, 1, 1, 1.0, 1.0               # Sem paredes e objetivo reto, segue reto
-5, 0, 0.2, 0.15, 1, 1, 0.15, 0.2, 1.0, 1.0     # Corredor e objetivo pra frente, segue reto
-5, 3.14, 0.2, 0.15, 1, 1, 0.15, 0.2, 1.0, 1.0  # Corredor e objetivo pra trás, segue reto
+5, 0, 0.18, 0.18, 1, 1, 0.18, 0.18, 1.0, 1.0     # Corredor e objetivo pra frente, segue reto
+5, 3.14, 0.18, 0.18, 1, 1, 0.18, 0.18, 1.0, 1.0  # Corredor e objetivo pra trás, segue reto
