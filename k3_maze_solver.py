@@ -17,14 +17,14 @@ def end_connection(clientID):
   simxFinish(clientID)
 
 def euclidean_distance(pointA, pointB):
-  return (pointB[0]-pointA[0])**2 + (pointB[1]-pointA[1])**2
+  return sqrt( (pointB[0]-pointA[0])**2 + (pointB[1]-pointA[1])**2 )
 
 if __name__ == "__main__": 
   simxFinish(-1) # Just in case, close all connections
 
   print("Objetivo (x y)")
-  goal_x = int(input())
-  goal_y = int(input())
+  goal_x = float(input())
+  goal_y = float(input())
 
   print("Conectando-se ao VREP...", end='')
   clientID = simxStart('127.0.0.1', 19999, True, True, 5000, 5)
@@ -79,6 +79,7 @@ if __name__ == "__main__":
 
     # Inicialização e treino da rede neural
     model = create_network()
+    multiplier = 5
 
     #	Loop de Execução
     while (simxGetConnectionId(clientID) != -1):
@@ -91,6 +92,8 @@ if __name__ == "__main__":
 
       # Calcula a distancia e o angulo com o objetivo
       distance_to_goal = euclidean_distance((current_x, current_y), (goal_x, goal_y))
+      if distance_to_goal < 0.1:
+        break
 
       goal_angle = atan2(goal_y-current_y, goal_x-current_x)
       angle_turning_to_one_side = abs(goal_angle - current_angle)
@@ -105,10 +108,10 @@ if __name__ == "__main__":
       if angle_to_turn > pi:
         angle_to_turn -= 2*pi
 
-      print(f"\nPosição do {robot_name}: ({current_x}, {current_y})")
-      print(f"  Orientação atual: {current_angle} radianos")
-      print(f"  Distância até o objetivo: {distance_to_goal}")
-      print(f"  Angulo para ficar de frente pro objetivo: {angle_to_turn} radianos")
+      print(f"\nPosição do {robot_name}: ({current_x:2f}, {current_y:2f})")
+      print(f"  Orientação atual: {current_angle:.2f} radianos")
+      print(f"  Distância até o objetivo: {distance_to_goal:2f}")
+      print(f"  Angulo para ficar de frente pro objetivo: {angle_to_turn:2f} radianos")
 
       # Lê os sensores, calcula as distâncias
       for i in range(NUM_SENSORS):
@@ -120,10 +123,10 @@ if __name__ == "__main__":
                           pow(detectedPoint[2], 2))
           distances[i] = sqrt(distances[i])
         else:
-          distances[i] = 1;
+          distances[i] = 1
 
       # Rede neural (já treinada):
-      #   Inputs: distance_to_goal, angle_to_turn, distância dos 5 sensores
+      #   Inputs: distance_to_goal, angle_to_turn, distância dos 6 sensores
       #   Outputs: left_speed, right_speed
 
       inputs = np.array([[
@@ -136,12 +139,17 @@ if __name__ == "__main__":
         distances[4],
         distances[5]
       ]])
-      outputs = model.predict(inputs)[0] * 10
+      outputs = model.predict(inputs)[0] * multiplier
+      # Começa lento e vai aumentando até a velocidade
+      # máxima para não sair "empinando"
+      if multiplier < 20:
+        multiplier += 5
+
       left_speed, right_speed = outputs[0], outputs[1]
 
-      print(f"  Esq={left_speed}, Dir={right_speed}")
-      _ = simxSetJointTargetVelocity(clientID, left_motor_handle, left_speed, simx_opmode_oneshot)
-      _ = simxSetJointTargetVelocity(clientID, right_motor_handle, right_speed, simx_opmode_oneshot)
+      print(f"  Esq={left_speed:2f}, Dir={right_speed:2f}")
+      _ = simxSetJointTargetVelocity(clientID, left_motor_handle, left_speed, simx_opmode_streaming)
+      _ = simxSetJointTargetVelocity(clientID, right_motor_handle, right_speed, simx_opmode_streaming)
 
     print("Conexão fechada!")
     end_connection(clientID)

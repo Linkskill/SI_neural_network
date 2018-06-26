@@ -24,26 +24,29 @@ def create_network():
 # para 13 entradas e 2 saidas, fazer 17 (15 + 2) neuronios na primeira camada,
 # (como sao 2 saidas) com 2 camadas intermediarias, e a cada camada adicional 
 # subtrair 1 neurônio (as vezes ajuda como critério de desempate para conflitos)
-    model.add(Dense(17, input_dim=8, activation='sigmoid'))
-    model.add(Dense(16, activation='sigmoid'))
-    model.add(Dense(2, activation='sigmoid'))
+    model.add(Dense(25, input_dim=8, activation='sigmoid'))
+    model.add(Dense(24, activation='sigmoid'))
+    model.add(Dense(23, activation='sigmoid'))
+    model.add(Dense(2, activation='tanh'))
 
     our_optimizer = keras.optimizers.SGD(lr=0.03, momentum=0.0, decay=0.0, nesterov=False)
     model.compile(loss='mean_squared_error',
-    #              optimizer=our_optimizer,
+    #            optimizer=our_optimizer,
                 optimizer='adam',
                 metrics=['accuracy'])
 
     model.fit(training_data, target_data, epochs=1000, verbose=2)
 
-    # Output da sigmoide varia de 0 a 1, tem que normalizar pro
-    # limite min e max que a gente quer de velocidade
-    # (fiz de 0 a 10, até a gente decidir)
-    print("Results:")
-    print(model.predict(training_data))
-
-    print("Expected:")
-    print(target_data)
+    early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss',
+                                min_delta=0,
+                                patience=0,
+                                verbose=0, mode='auto')
+    model.fit(training_data, target_data,
+        epochs=1000,
+        verbose=2,
+        validation_split=0.3,
+        callbacks=[early_stopping]
+    )
 
     return model
 
