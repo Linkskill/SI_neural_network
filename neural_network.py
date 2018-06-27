@@ -20,13 +20,9 @@ def create_network():
     print(target_data)
 
     model = Sequential()
-# fazendo testes no site tensorflow acabei achando um "padrão"legal: 
-# para 13 entradas e 2 saidas, fazer 17 (15 + 2) neuronios na primeira camada,
-# (como sao 2 saidas) com 2 camadas intermediarias, e a cada camada adicional 
-# subtrair 1 neurônio (as vezes ajuda como critério de desempate para conflitos)
-    model.add(Dense(25, input_dim=8, activation='sigmoid'))
-    model.add(Dense(24, activation='sigmoid'))
-    model.add(Dense(23, activation='sigmoid'))
+    model.add(Dense(31, input_dim=8, activation='sigmoid'))
+    model.add(Dense(30, activation='sigmoid'))
+    model.add(Dense(29, activation='sigmoid'))
     model.add(Dense(2, activation='tanh'))
 
     our_optimizer = keras.optimizers.SGD(lr=0.03, momentum=0.0, decay=0.0, nesterov=False)
