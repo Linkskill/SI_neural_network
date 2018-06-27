@@ -35,14 +35,14 @@ def create_network():
                 optimizer='adam',
                 metrics=['accuracy'])
 
-    model.fit(training_data, target_data, epochs=1000, verbose=2)
+    model.fit(training_data, target_data, epochs=500, verbose=2)
 
     early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss',
                                 min_delta=0,
                                 patience=0,
                                 verbose=0, mode='auto')
     model.fit(training_data, target_data,
-        epochs=1000,
+        epochs=500,
         verbose=2,
         validation_split=0.3,
         callbacks=[early_stopping]

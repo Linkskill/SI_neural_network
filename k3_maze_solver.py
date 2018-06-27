@@ -142,7 +142,7 @@ if __name__ == "__main__":
       outputs = model.predict(inputs)[0] * multiplier
       # Começa lento e vai aumentando até a velocidade
       # máxima para não sair "empinando"
-      if multiplier < 20:
+      if multiplier < 15:
         multiplier += 5
 
       left_speed, right_speed = outputs[0], outputs[1]
