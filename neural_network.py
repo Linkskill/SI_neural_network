@@ -19,8 +19,9 @@ def create_network():
     print(target_data)
 
     model = Sequential()
-    model.add(Dense(18, input_dim=8))
-    model.add(Dense(16, activation='sigmoid'))
+    model.add(Dense(31, input_dim=8))
+    model.add(Dense(30, activation='sigmoid'))
+    model.add(Dense(29, activation='sigmoid'))
     model.add(Dense(2, activation='sigmoid'))
 
     model.compile(loss='mean_squared_error',

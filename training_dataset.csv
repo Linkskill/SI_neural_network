@@ -1,37 +1,55 @@
 # distance_to_goal angle_to_turn sensor_L sensor_LM sensor_ML sensor_MR sensor_RM sensor_RM
 
 # Virando pra direita
-5, -1.57, 1, 1, 1, 1, 1, 1, 1.0, 0.3   # Sem paredes e objetivo pra direita
-5, -0.79, 1, 1, 1, 1, 1, 1, 1.0, 0.6
-5, -0.79, 0.17, 0.2, 1, 1, 1, 1, 1.0, 0.5   # Parede na esquerda e objetivo pra direita, se afasta da parede
-5, -1.57, 1, 1, 0.2, 0.2, 1, 1, 1.0, 0.0   # Parede na frente e objetivo pra direita
-5, -0.79, 0.17, 0.2, 0.2, 0.2, 1, 1, 1.0, 0.0   # Parede na frente e na esquerda e objetivo pra direita
-5, 0, 0.17, 0.2, 0.17, 1, 1, 1, 1.0, 0.5   # Parede na diagonal esquerda e objetivo pra frente
-5, -0.79, 1, 1, 1, 1, 1, 0.2, 1.0, 0.6  # Parede na direita acabando e objetivo pra direita, solta da parede
+5, -1.57, 1, 1, 1, 1, 1, 1, 1.0, 0.15        # Sem paredes e objetivo pra direita, vira pra direita
+5, -0.79, 1, 1, 1, 1, 1, 1, 1.0, 0.30
+5, -0.79, 0.2, 0.18, 1, 1, 1, 1, 1.0, 0.5         # Parede na esquerda e objetivo pra direita, se afasta da parede
+5, -0.79, 0.18, 0.10, 1, 1, 1, 1, 1.0, 0.25         # Parede na esquerda e objetivo pra direita, se afasta da parede
+5, -0.79, 0.10, 0.05, 1, 1, 1, 1, 1.0, 0.10         # Parede na esquerda e objetivo pra direita, se afasta da parede
+
+5, -1.57, 1, 1, 0.18, 0.18, 1, 1, 0.2, -0.2 # Parede na frente e objetivo pra direita, começa a contornar pela direita
+5, 0, 0.18, 0.2, 0.18, 1, 1, 1, 0.2, -0.2   # Parede na frente-esquerda e objetivo pra frente, rotaciona pra direita para contornar
+5, -0.79, 1, 1, 1, 1, 1, 0.2, 0.5, 0.25     # Parede na direita acabando e objetivo pra direita, solta da parede
 
 # Virando pra esquerda
-5, 1.57, 1, 1, 1, 1, 1, 1, 0.3, 1.0    # Sem paredes e objetivo pra esquerda
-5, 0.79, 1, 1, 1, 1, 1, 1, 0.6, 1.0
-5, 0.79, 1, 1, 1, 1, 0.2, 0.17, 0.5, 1.0    # Parede na direita e objetivo pra esquerda, se afasta da parede
-5, 1.57, 1, 1, 0.2, 0.2, 1, 1, 0.0, 1.0    # Parede na frente e objetivo pra esquerda
-5, 0.79, 1, 1, 0.2, 0.2, 0.2, 0.17, 0.0, 1.0   # Parede na frente e na direita e objetivo pra esquerda
-5, 0, 1, 1, 1, 0.17, 0.2, 0.17, 0.5, 1.0    # Parede na diagonal direita e objetivo pra frente
-5, 0.79, 0.2, 1, 1, 1, 1, 1, 0.6, 1.0   # Parede na esquerda acabando e objetivo pra esquerda, solta da parede
+5, 1.57, 1, 1, 1, 1, 1, 1, 0.15, 1.0        # Sem paredes e objetivo pra esquerda, vira pra esquerda
+5, 0.79, 1, 1, 1, 1, 1, 1, 0.30, 1.0
+5, 0.79, 1, 1, 1, 1, 0.18, 0.2, 0.5, 1.0         # Parede na direita e objetivo pra esquerda, se afasta da parede
+5, 0.79, 1, 1, 1, 1, 0.10, 0.18, 0.25, 1.0         # Parede na direita e objetivo pra esquerda, se afasta da parede
+5, 0.79, 1, 1, 1, 1, 0.05, 0.10, 0.10, 1.0         # Parede na direita e objetivo pra esquerda, se afasta da parede
 
-# Preferência no caso onde tem parede na frente e o objetivo está atrás da parede
-5, 0, 1, 1, 0.2, 0.2, 1, 1, 0.0, 1.0
+5, 1.57, 1, 1, 0.18, 0.18, 1, 1, -0.2, 0.2  # Parede na frente e objetivo pra esquerda, começa a contornar pela esquerda
+5, 0, 1, 1, 1, 0.18, 0.2, 0.18, -0.2, 0.2   # Parede na frente-direita e objetivo pra frente, rotaciona pra esquerda para contornar
+5, 0.79, 0.2, 1, 1, 1, 1, 1, 0.25, 0.5      # Parede na esquerda acabando e objetivo pra esquerda, solta da parede
+
+# Escolhe um lado só se encontrar parede na frente, indo na direção oposta do objetivo
+5, -1.57, 1, 1, 0.18, 0.18, 1, 1, 0.15, 1.0     
+5, -0.79, 1, 1, 0.18, 0.18, 1, 1, 0.30, 1.0     
+5, 0.79, 1, 1, 0.18, 0.18, 1, 1, 1.0, 0.30
+5, 1.57, 1, 1, 0.18, 0.18, 1, 1, 1.0, 0.15
+
+# Escolhe um lado dependendo de qual sensor da frente encosta primeiro (não importa o lado do objetivo)
+5, 1.57, 1, 1, 1, 0.18, 1, 1, 0.15, 1.0     
+5, -1.57, 1, 1, 1, 0.18, 1, 1, 0.15, 1.0     
+5, 0.79, 1, 1, 1, 0.18, 1, 1, 0.30, 1.0       
+5, -0.79, 1, 1, 1, 0.18, 1, 1, 0.30, 1.0
+
+5, -0.79, 1, 1, 0.18, 1, 1, 1, 1.0, 0.30    
+5, 0.79, 1, 1, 0.18, 1, 1, 1, 1.0, 0.30    
+5, -1.57, 1, 1, 0.18, 1, 1, 1, 1.0, 0.15    
+5, 1.57, 1, 1, 0.18, 1, 1, 1, 1.0, 0.15    
 
 # Segue reto
-5, 0, 1, 1, 1, 1, 1, 1, 1.0, 1.0    # Sem paredes e objetivo pra frente
-0.5, 0, 1, 1, 1, 1, 1, 1, 0.5, 0.5  # Se aproximando
-0.0, 0, 1, 1, 1, 1, 1, 1, 0.0, 0.0  # Chegou, para
-5, 0, 0.17, 0.2, 1, 1, 1, 1, 1.0, 1.0   # Parede na esquerda e objetivo pra frente
-5, 0, 1, 1, 1, 1, 0.2, 0.17, 1.0, 1.0   # Parede na direita e objetivo pra frente
+5, 0, 1, 1, 1, 1, 1, 1, 1.0, 1.0               # Sem paredes e objetivo reto, segue reto
+0.5, 0, 1, 1, 1, 1, 1, 1, 0.5, 0.5             # Desacelera quando se aproxima do objetivo
+0, 0, 1, 1, 1, 1, 1, 1, 0.0, 0.0               # Desacelera quando se aproxima do objetivo
+5, 0, 0.19, 1, 1, 1, 1, 1, 1.0, 1.0          # Parede na esquerda e objetivo reto, segue reto
+5, 0, 1, 1, 1, 1, 1, 0.19, 1.0, 1.0          # Parede na direita e objetivo reto, segue reto
 
-###5, 1.57, 0.17, 0.2, 1, 1, 1, 1, 1.0, 1.0    # Parede na esquerda e objetivo atrás da parede
-###5, -1.57, 1, 1, 1, 1, 0.2, 0.17, 1.0, 1.0   # Parede na direita e objetivo atrás da parede
+5, 1.57, 0.19, 1, 1, 1, 1, 1, 1.0, 1.0       # Parede na esquerda e objetivo atrás da parede, segue reto
+5, 1.57, 0.2, 1, 1, 1, 1, 1, 1.0, 1.0       # Parede na esquerda e objetivo atrás da parede, segue reto
+5, -1.57, 1, 1, 1, 1, 1, 0.19, 1.0, 1.0      # Parede na esquerda e objetivo atrás da parede, segue reto
+5, -1.57, 1, 1, 1, 1, 1, 0.2, 1.0, 1.0      # Parede na esquerda e objetivo atrás da parede, segue reto
 
-5, 0, 0.18, 0.2, 1, 1, 0.2, 0.18, 1.0, 1.0     # Corredor e objetivo pra frente
-### 5, 3.14, 0.2, 0.18, 1, 1, 0.18, 0.2, 1.0, 1.0  # Corredor e objetivo pra trás
-
-
+5, 0, 0.19, 1, 1, 1, 1, 0.19, 1.0, 1.0     # Corredor e objetivo pra frente, segue reto
+5, 3.14, 0.19, 1, 1, 1, 1, 0.19, 1.0, 1.0  # Corredor e objetivo pra trás, segue reto
