@@ -20,11 +20,15 @@ def euclidean_distance(pointA, pointB):
   return sqrt( (pointB[0]-pointA[0])**2 + (pointB[1]-pointA[1])**2 )
 
 if __name__ == "__main__": 
+  # Inicialização e treino da rede neural
+  model = create_network()
+
+  print()
+
   simxFinish(-1) # Just in case, close all connections
 
   print("Objetivo (x y)")
-  goal_x = float(input())
-  goal_y = float(input())
+  goal_x, goal_y = map(float, input().split())
 
   print("Conectando-se ao VREP...", end='')
   clientID = simxStart('127.0.0.1', 19999, True, True, 5000, 5)
@@ -64,6 +68,7 @@ if __name__ == "__main__":
       else:
         print("Falhou!")
         end_connection(clientID)
+        exit()
 
     # Inicialização dos motores
     print("Conectando-se aos motores...", end='')
@@ -75,10 +80,7 @@ if __name__ == "__main__":
       print("Falhou!")
       end_connection(clientID)
       exit()
-    print()
 
-    # Inicialização e treino da rede neural
-    model = create_network()
     multiplier = 5
 
     #	Loop de Execução
@@ -108,10 +110,10 @@ if __name__ == "__main__":
       if angle_to_turn > pi:
         angle_to_turn -= 2*pi
 
-      print(f"\nPosição do {robot_name}: ({current_x:2f}, {current_y:2f})")
-      print(f"  Orientação atual: {current_angle:.2f} radianos")
-      print(f"  Distância até o objetivo: {distance_to_goal:2f}")
-      print(f"  Angulo para ficar de frente pro objetivo: {angle_to_turn:2f} radianos")
+      print(f"\nPosição: ({current_x:.2f}, {current_y:.2f})")
+      print(f"Orientação: {current_angle:.2f} rad")
+      print(f"  Distância até o objetivo: {distance_to_goal:.2f}")
+      print(f"  Angulo para ficar de frente pro objetivo: {angle_to_turn:.2f} radianos")
 
       # Lê os sensores, calcula as distâncias
       for i in range(NUM_SENSORS):
@@ -147,9 +149,9 @@ if __name__ == "__main__":
 
       left_speed, right_speed = outputs[0], outputs[1]
 
-      print(f"  Esq={left_speed:2f}, Dir={right_speed:2f}")
-      _ = simxSetJointTargetVelocity(clientID, left_motor_handle, left_speed, simx_opmode_streaming)
-      _ = simxSetJointTargetVelocity(clientID, right_motor_handle, right_speed, simx_opmode_streaming)
+      print(f"  Esq={left_speed:.2f}, Dir={right_speed:.2f}")
+      _ = simxSetJointTargetVelocity(clientID, left_motor_handle, left_speed, simx_opmode_blocking)
+      _ = simxSetJointTargetVelocity(clientID, right_motor_handle, right_speed, simx_opmode_blocking)
 
     print("Conexão fechada!")
     end_connection(clientID)
