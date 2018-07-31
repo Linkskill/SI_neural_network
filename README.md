@@ -29,13 +29,13 @@ Caso não estejam instalados:
 
 * Instale o [VREP 3.5](http://www.coppeliarobotics.com/downloads.html).
 
-* Copie os seguintes arquivos da sua pasta de instalação do VREP para o diretório atual:
 <!---
+* Copie os seguintes arquivos da sua pasta de instalação do VREP para o diretório atual:
 * vrep.py
 * vrepConst.py
 Ambos estão localizados em /programming/remoteApiBindings/python/python na pasta da sua instalação do VREP.
--->
 * remoteApi.dll (Windows), remoteApi.dylib (MAC) or remoteApi.so (Linux) (localizados em /programming/remoteApiBindings/lib/lib)
+-->
 
 ---
 ## Executando
@@ -65,6 +65,21 @@ Faça como indicado e use a flag --user
     pip uninstall tensorflow
     pip install tensorflow==1.5
 ```
+
+---
+## Possíveis melhorias
+
+* Refatorar. Entre outras coisas:
+    * Extrair métodos de inicialização do robô
+    * Extrair leituras dos sensores e cálculos para métodos separados
+
+* Mais exemplos no conjunto de treinamento
+
+* Mudar saida da rede para ser a direção que o robô deve virar (ou então o ângulo que ele deve virar para olhar pra essa direção)
+
+    Um outro sistema (Fuzzy? NN?) que aprenda a transformar ângulo em velocidades pros motores
+
+* Reescrever em outra linguagem se começar a ficar muito grande o código?
 
 ---
 ## Links úteis
